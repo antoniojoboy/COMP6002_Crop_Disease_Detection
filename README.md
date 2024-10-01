@@ -1,1 +1,1 @@
-"# COMP6002_Crop_Disease_Detection" 
+# COMP6002_Crop_Disease_Detection
