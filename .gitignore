@@ -1,1 +1,7 @@
 dataset/-plantvillage-dataset-1/
+runs/detect/
+runs/detect/train8/val_batch1_labels.jpg
+dataset/maize-disease-20240221-8/
+baysian_hyper_tuning/
+runs/segment/train/confusion_matrix_normalized.png
+runs/
