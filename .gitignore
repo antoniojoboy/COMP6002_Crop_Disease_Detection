@@ -7,3 +7,4 @@ runs/segment/train/confusion_matrix_normalized.png
 runs/
 sweep_tuning
 wandb/
+optuna_tuning/

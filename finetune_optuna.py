@@ -6,12 +6,15 @@ from ultralytics import YOLO  # Assuming this is the model you're using
 wandb.login()
 run = wandb.init(
     # Set the project where this run will be logged
-    project="optuna_tuning",
+    project="optuna_tuning"
     # Track hyperparameters and run metadata
-    config={
-        "learning_rate": 0.01,
-        "epochs": 10,
-    },
+    # ,config={
+    #     "learning_rate": 0.01,
+    #     "weight_decay": 0.01,
+    #     "momentum": 0.01,
+    #     "mAP": 1,
+    #     "epochs": 10,
+    # }
 )
 
 
@@ -20,9 +23,10 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 
 def objective(trial):
     # Define hyperparameters based on the trial
-    lr0 = trial.suggest_loguniform('learning_rate', 0.001, 0.1)
-    weight_decay = trial.suggest_loguniform('weight_decay',0.01, 0.99)
-    momentum = trial.suggest_uniform('momentum', 0.01, 0.99)
+    lr0 = trial.suggest_loguniform('learning_rate', 0.01, 0.1)
+    batch = int(trial.suggest_discrete_uniform('batch', 4, 64,4))
+    weight_decay = trial.suggest_loguniform('weight_decay',0.1, 0.2)
+    momentum = trial.suggest_uniform('momentum', 0.9, 0.99)
     # batch_size = trial.suggest_int('batch_size', 8, 10)
     # confidence_threshold = t rial.suggest_uniform('confidence_threshold', 0.1, 0.9)
     # iou_threshold = trial.suggest_uniform('iou_threshold', 0.3, 0.9)
@@ -38,12 +42,13 @@ def objective(trial):
     model.train(
         data=home+"/dataset/"+dataset_name+"/data.yaml"
         ,lr0=lr0
+        ,batch=batch
         ,momentum=momentum
         ,weight_decay=weight_decay
-        ,project="baysian_hyper_tuning"
-        ,name="yolo11n-finetuned"
+        ,project="optuna_tuning"
+        ,name="optuna"
         ,device = "0,1"
-        ,epochs = 100
+        ,epochs = 1
         # ,iterations=1
     )
 
@@ -60,13 +65,18 @@ def objective(trial):
         data=home+"/dataset/"+dataset_name+"/data.yaml"
         ,device = "0,1"
     )
-    mAP = metrics.box.map
+    
+    mAP = metrics.seg.map
+    
+    wandb.log({
+        "learning_rate":lr0
+        ,"batch":batch
+        ,"momentum":momentum
+        ,"weight_decay":weight_decay
+        ,"mAP":mAP
+    })
 
     return mAP  # Higher is better in this case
-
-
-
-
 
 
 study = optuna.create_study(direction='maximize')  # We want to maximize the mAP
