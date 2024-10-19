@@ -27,6 +27,7 @@ def objective(trial):
     batch = int(trial.suggest_discrete_uniform('batch', 4, 64,4))
     weight_decay = trial.suggest_loguniform('weight_decay',0.1, 0.2)
     momentum = trial.suggest_uniform('momentum', 0.9, 0.99)
+    epochs = int(trial.suggest_discrete_uniform('epochs', 10, 100,10))
     # batch_size = trial.suggest_int('batch_size', 8, 10)
     # confidence_threshold = t rial.suggest_uniform('confidence_threshold', 0.1, 0.9)
     # iou_threshold = trial.suggest_uniform('iou_threshold', 0.3, 0.9)
@@ -34,6 +35,7 @@ def objective(trial):
 
     # define the model
     model = YOLO("yolo11n-seg.pt").to('cuda')
+    model.load("YOLO11n-seg_trained_maize-disease-20240221-8.pt")
     
     home = os.getcwd()
     dataset_name = "maize-disease-20240221-8"
@@ -45,11 +47,11 @@ def objective(trial):
         ,batch=batch
         ,momentum=momentum
         ,weight_decay=weight_decay
+        ,epochs = epochs
         ,project="optuna_tuning"
-        ,name="optuna"
+        ,name="optuna_trained"
         ,device = "0,1"
-        ,epochs = 1
-        # ,iterations=1
+        ,optimizer = "SGD"
     )
 
     # # Train the model (you will need to define this)

@@ -43,7 +43,7 @@ def objective(trial):
         ,project="baysian_hyper_tuning"
         ,name="yolo11n-finetuned"
         ,device = "0,1"
-        ,epochs = 100
+        ,epochs = 1000
         # ,iterations=1
     )
 
