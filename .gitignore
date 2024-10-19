@@ -10,3 +10,4 @@ wandb/
 optuna_tuning/
 optuna_full_range/
 optuna_incremental/
+dataset/maize-uav-crop-disease/
