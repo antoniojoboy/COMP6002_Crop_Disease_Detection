@@ -20,8 +20,8 @@ def objective(trial):
     batch = int(trial.suggest_discrete_uniform('batch', 4, 64,4))
     weight_decay = trial.suggest_loguniform('weight_decay',0.01, 0.99)
     momentum = trial.suggest_uniform('momentum', 0.01, 0.99)
-    # epochs = int(trial.suggest_discrete_uniform('epochs', 50, 1000,10))
-    epochs = 300
+    epochs = int(trial.suggest_discrete_uniform('epochs', 50, 1000,10))
+    # epochs = 1
     
     # define the model
     model = YOLO("yolo11n-seg.pt").to('cuda')
@@ -34,12 +34,12 @@ def objective(trial):
     model.train(
         data=home+"/dataset/"+dataset_name+"/data.yaml"
         ,lr0=lr0
-        ,batch=batch
+        # ,batch=batch
         ,momentum=momentum
         ,weight_decay=weight_decay
         ,epochs = epochs
         ,project="optuna_full_range"
-        ,name="optuna_trained"
+        ,name="optuna_full"
         ,device = "0,1"
         ,optimizer = "SGD"
     )
@@ -49,16 +49,11 @@ def objective(trial):
         data=home+"/dataset/"+dataset_name+"/data.yaml"
         ,device = "0,1"
     )
-    mAP = metrics.box.map
+    mAP = metrics.seg.map
     
     # model.save("YOLO11n-seg_trained_tuning.pt")
 
     return mAP  # Higher is better in this case
-
-
-
-
-
 
 study = optuna.create_study(direction='maximize')  # We want to maximize the mAP
 study.optimize(objective, n_trials=50)  # Run for 50 trials (or more based on resources)

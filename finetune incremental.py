@@ -6,23 +6,26 @@ from ultralytics import YOLO  # Assuming this is the model you're using
 wandb.login()
 run = wandb.init(
     # Set the project where this run will be logged
-    project="bayes_incremental",
+    project="optuna_incremental",
     # Track hyperparameters and run metadata
 )
 
+
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
+
 
 def objective(trial):
     # Define hyperparameters based on the trial
-    lr0 = trial.suggest_loguniform('learning_rate', 0.01, 0.1)
+    lr0 = trial.suggest_loguniform('learning_rate', 0.001, 0.1)
     batch = int(trial.suggest_discrete_uniform('batch', 4, 64,4))
-    weight_decay = trial.suggest_loguniform('weight_decay',0.1, 0.2)
-    momentum = trial.suggest_uniform('momentum', 0.9, 0.99)
-    epochs = int(trial.suggest_discrete_uniform('epochs', 50, 70,10))
+    weight_decay = trial.suggest_loguniform('weight_decay',0.01, 0.99)
+    momentum = trial.suggest_uniform('momentum', 0.01, 0.99)
+    # epochs = int(trial.suggest_discrete_uniform('epochs', 50, 1000,10))
+    epochs = 5
     
     # define the model
     model = YOLO("yolo11n-seg.pt").to('cuda')
-    model.load("YOLO11n-seg_trained_tuning.pt")
+    model.load("YOLO11n-seg_tuning_full_range_incremental.pt")
     
     home = os.getcwd()
     dataset_name = "maize-disease-20240221-8"
@@ -35,8 +38,8 @@ def objective(trial):
         ,momentum=momentum
         ,weight_decay=weight_decay
         ,epochs = epochs
-        ,project="bayes_incremental"
-        ,name="optuna_trained"
+        ,project="optuna_incremental"
+        ,name="incremental_tuning"
         ,device = "0,1"
         ,optimizer = "SGD"
     )
@@ -48,7 +51,7 @@ def objective(trial):
     )
     mAP = metrics.box.map
     
-    model.save("YOLO11n-seg_trained_tuning.pt")
+    model.save("YOLO11n-seg_tuning_full_range_incremental.pt")
 
     return mAP  # Higher is better in this case
 
@@ -58,7 +61,7 @@ def objective(trial):
 
 
 study = optuna.create_study(direction='maximize')  # We want to maximize the mAP
-study.optimize(objective, n_trials=50)  # Run for 50 trials (or more based on resources)
+study.optimize(objective, n_trials=500)  # Run for 50 trials (or more based on resources)
 
 # Get the best hyperparameters
 best_params = study.best_params

@@ -8,4 +8,5 @@ runs/
 sweep_tuning
 wandb/
 optuna_tuning/
-optuna_full_range
+optuna_full_range/
+optuna_incremental/
