@@ -5,3 +5,5 @@ dataset/maize-disease-20240221-8/
 baysian_hyper_tuning/
 runs/segment/train/confusion_matrix_normalized.png
 runs/
+sweep_tuning
+wandb/
