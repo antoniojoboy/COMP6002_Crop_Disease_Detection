@@ -8,13 +8,13 @@ run = wandb.init(
     # Set the project where this run will be logged
     project="optuna_tuning"
     # Track hyperparameters and run metadata
-    # ,config={
-    #     "learning_rate": 0.01,
-    #     "weight_decay": 0.01,
-    #     "momentum": 0.01,
-    #     "mAP": 1,
-    #     "epochs": 10,
-    # }
+    ,config={
+        "learning_rate": 0.01,
+        "weight_decay": 0.01,
+        "momentum": 0.01,
+        "mAP": 1,
+        "epochs": 10,
+    }
 )
 
 

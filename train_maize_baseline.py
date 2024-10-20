@@ -9,11 +9,12 @@ home = os.getcwd()
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 print(home)
 
-model_name = "YOLO11n-seg" # segmentation
+model_name = "yolov8n-seg" # segmentation
 dataset_name = "maize-uav-crop-disease"
 
 # Load a YOLO11n model
 model = YOLO("yolo11n-seg.pt")
+model = YOLO("yolov8n-seg.pt")
 # model.load(home+"/runs/detect/train6/weights/best.pt")
 
 # Start tuning hyperparameters for YOLO11n training on the COCO8 dataset

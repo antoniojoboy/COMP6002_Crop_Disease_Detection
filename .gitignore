@@ -11,4 +11,5 @@ optuna_tuning/
 optuna_full_range/
 optuna_incremental/
 dataset/maize-uav-crop-disease/
-dataset/original (0.1mm GSD)/
+BEST RESULTS/
+optuna_maize_baysian/
