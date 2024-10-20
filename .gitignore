@@ -11,5 +11,5 @@ optuna_tuning/
 optuna_full_range/
 optuna_incremental/
 dataset/maize-uav-crop-disease/
-BEST RESULTS/
 optuna_maize_baysian/
+optuna_maize_baysian_post/tune2/weights/epoch45.pt
