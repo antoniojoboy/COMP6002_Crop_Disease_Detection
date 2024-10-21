@@ -1,6 +1,5 @@
 import optuna
 import os
-import torch
 import wandb
 from ultralytics import YOLO  # Assuming this is the model you're using
 

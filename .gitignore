@@ -14,3 +14,4 @@ dataset/maize-uav-crop-disease/
 optuna_maize_baysian/
 optuna_maize_baysian_post/tune2/weights/epoch45.pt
 dataset/
+env/

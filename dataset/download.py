@@ -1,9 +1,12 @@
 import os 
 
 # os.system("pip install roboflow")
+# i have deleted this so im not worried about it
+# its just for demo of how it was set up
+api_key = "Wp8GYbxNZgLdlrtf1eCB"
 
 from roboflow import Roboflow
-rf = Roboflow(api_key="Wp8GYbxNZgLdlrtf1eCB")
+rf = Roboflow(api_key=api_key)
 
 
 
