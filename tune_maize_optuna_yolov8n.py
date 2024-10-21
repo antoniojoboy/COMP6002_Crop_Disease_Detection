@@ -17,15 +17,12 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 def objective(trial):
     # Define hyperparameters based on the trial
     lr0 = trial.suggest_loguniform('learning_rate', 0.01, 0.03)
-    # batch = int(trial.suggest_discrete_uniform('batch', 12, 24,4))
+    batch = int(trial.suggest_discrete_uniform('batch', 12, 24,4))
     weight_decay = trial.suggest_loguniform('weight_decay',0.0007,0.001)
     momentum = trial.suggest_uniform('momentum', 0.7, 0.8)
-    # epochs = int(trial.suggest_discrete_uniform('epochs', 50, 100,10))
+    epochs = int(trial.suggest_discrete_uniform('epochs', 50, 100,10))
+    optimizer = trial.suggest_categorical("optimizer", ["SGD", "Adam"])
     
-    epochs = 100
-    batch = 100
-    
-    # workers = 
     # define the model
     model = YOLO("yolov8n-seg.pt").to('cuda')
     # model.load("YOLO11n-seg_trained_maize-disease-20240221-8.pt")
@@ -41,7 +38,7 @@ def objective(trial):
         ,momentum=momentum
         ,weight_decay=weight_decay
         ,epochs = epochs
-        ,optimizer="SGD"
+        ,optimizer=optimizer
         ,project="optuna_maize_baysian"
         ,name="maize_yolov8n-seg"
         ,device = "0,1"
