@@ -1,8 +1,7 @@
 import optuna
 import os
-import torch
 import wandb
-from ultralytics import YOLO  # Assuming this is the model you're using
+from ultralytics import YOLO  
 
 wandb.login()
 run = wandb.init(
@@ -18,15 +17,12 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 def objective(trial):
     # Define hyperparameters based on the trial
     lr0 = trial.suggest_loguniform('learning_rate', 0.009, 0.011)
-    # batch = int(trial.suggest_discrete_uniform('batch', 50, 100,20))
+    batch = int(trial.suggest_discrete_uniform('batch', 50, 100,20))
     weight_decay = trial.suggest_loguniform('weight_decay',0.0004,0.0006)
     momentum = trial.suggest_uniform('momentum', 0.92, 0.94)
-    # epochs = int(trial.suggest_discrete_uniform('epochs', 50, 100,10))
-    
-    epochs = 100
-    batch = 16
-    
-    # workers = 
+    epochs = int(trial.suggest_discrete_uniform('epochs', 50, 100,10))
+    optimizer = trial.suggest_categorical("optimizer", ["SGD", "Adam"])
+
     # define the model
     model = YOLO("yolo11n-seg.pt").to('cuda')
     # model.load("YOLO11n-seg_trained_maize-disease-20240221-8.pt")
@@ -42,11 +38,11 @@ def objective(trial):
         ,momentum=momentum
         ,weight_decay=weight_decay
         ,epochs = epochs
-        # ,optimizer="Adam"
-        ,project="optuna_maize_baysian_post"
+        ,optimizer=optimizer
+        ,project="optuna_maize_baysian"
         ,name="yolo11n"
         ,device = "0,1"
-        # ,patience = 5
+        ,patience = 5
         ,save = True
         ,save_period = 5
         ,cache = True
