@@ -14,10 +14,10 @@ dataset_name = "maize-uav-crop-disease"
 
 # Load a YOLO11n model
 model = YOLO(home+"/BEST RESULTS/yolo11/weights/best.pt")
-test_data = home+"/dataset/"+dataset_name+"/test"
+Demo_image = home+"/demo/Demo_image/"
 # Run batched inference on a list of images
 results = model([
-    test_data+"J_170828_144938_1.jpg"
+    Demo_image+"demo_image.jpg"
     ])  # return a list of Results objects
 
 # Process results list
@@ -27,5 +27,5 @@ for result in results:
     keypoints = result.keypoints  # Keypoints object for pose outputs
     probs = result.probs  # Probs object for classification outputs
     obb = result.obb  # Oriented boxes object for OBB outputs
-    result.show()  # display to screen
-    result.save(filename="result.jpg")  # save to disk
+    # result.show()  # display to screen
+    result.save(filename=Demo_image+"demo_prediction.jpg")  # save to disk

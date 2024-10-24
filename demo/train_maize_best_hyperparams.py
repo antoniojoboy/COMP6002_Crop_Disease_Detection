@@ -23,7 +23,7 @@ optimizer = "SGD"
 # Load a YOLO11n model
 model = YOLO("yolo11n-seg.pt")
  
-model.tune(
+model.train(
     data=home+"/dataset/"+dataset_name+"/data.yaml"
     ,lr0=lr0
     ,batch=batch
