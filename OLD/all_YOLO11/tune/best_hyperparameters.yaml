@@ -1,0 +1,30 @@
+# 5/10 iterations complete ✅ (309.21s)
+# Results saved to all_YOLO11/tune
+# Best fitness=0.79339 observed at iteration 5
+# Best fitness metrics are {'metrics/precision(B)': 0.92752, 'metrics/recall(B)': 0.34586, 'metrics/mAP50(B)': 0.72319, 'metrics/mAP50-95(B)': 0.45038, 'metrics/precision(M)': 0.86539, 'metrics/recall(M)': 0.3227, 'metrics/mAP50(M)': 0.64709, 'metrics/mAP50-95(M)': 0.27892, 'val/box_loss': 1.26343, 'val/seg_loss': 2.2444, 'val/cls_loss': 1.48964, 'val/dfl_loss': 2.40742, 'fitness': 0.79339}
+# Best fitness model is all_YOLO11/yolo11n-seg.pt5
+# Best fitness hyperparameters are printed below.
+
+lr0: 0.00129
+lrf: 0.01214
+momentum: 0.7474
+weight_decay: 0.00034
+warmup_epochs: 3.10334
+warmup_momentum: 0.85904
+box: 7.05241
+cls: 0.31597
+dfl: 2.57946
+hsv_h: 0.02039
+hsv_s: 0.75274
+hsv_v: 0.48722
+degrees: 0.0
+translate: 0.07852
+scale: 0.6228
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.49073
+bgr: 0.0
+mosaic: 0.91593
+mixup: 0.0
+copy_paste: 0.0
