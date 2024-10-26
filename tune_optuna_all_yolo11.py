@@ -25,7 +25,7 @@ def objective(trial):
     # model.load("YOLO11n-seg_trained_maize-disease-20240221-8.pt")
     
     home = os.getcwd()
-    epochs = 2
+    epochs = 200
     dataset_name = "maize-uav-crop-disease"
     
     # Initialize YOLOv11 model
@@ -72,7 +72,7 @@ def run_all():
     for model_name in model_names:
         name = model_name
         study = optuna.create_study(direction='maximize')  # We want to maximize the mAP
-        study.optimize(objective, n_trials=2)  # Run for 50 trials (or more based on resources)
+        study.optimize(objective, n_trials=100)  # Run for 50 trials (or more based on resources)
 
         # Get the best hyperparameters
         best_params = study.best_params
