@@ -58,11 +58,11 @@ def objective(trial):
 
 def run_all():
     model_names = [
-        "yolo11n-seg.pt"
-        ,"yolo11s-seg.pt"
-        ,"yolo11m-seg.pt"
-        ,"yolo11l-seg.pt"
-        ,"yolo11x-seg.pt"
+        # "yolo11n-seg.pt"
+        "yolo11s-seg.pt"
+        # ,"yolo11m-seg.pt"
+        # ,"yolo11l-seg.pt"
+        # ,"yolo11x-seg.pt"
     ]
     
     global name
