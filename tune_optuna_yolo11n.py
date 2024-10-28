@@ -24,6 +24,7 @@ def objective(trial):
 
     # define the model
     model = YOLO("yolo11n-seg.pt").to('cuda')
+    model = YOLO("yolo11n-seg.pt").to('cuda')
     
     epochs = 100    
     home = os.getcwd()

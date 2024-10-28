@@ -6,7 +6,7 @@ from ultralytics import YOLO
 wandb.login()
 run = wandb.init(
     # Set the project where this run will be logged
-    project="yolo11n_best",
+    project="yolo11s_best",
     # Track hyperparameters and run metadata
 )
 
@@ -23,7 +23,7 @@ def objective(trial):
     # optimizer = trial.suggest_categorical("optimizer", ["SGD", "Adam"])
 
     # define the model
-    model = YOLO("yolo11n-seg.pt").to('cuda')
+    model = YOLO("yolo11s-seg.pt").to('cuda')
     
     lr0 = 0.01    
     epochs = 100  
@@ -45,8 +45,8 @@ def objective(trial):
         ,weight_decay=weight_decay
         ,epochs = epochs
         ,optimizer=optimizer
-        ,project="yolo11n_best"
-        ,name="yolo11n"
+        ,project="yolo11s_best"
+        ,name="yolo11s"
         ,device = "0,1"
         # ,patience = 5
         ,save = True
