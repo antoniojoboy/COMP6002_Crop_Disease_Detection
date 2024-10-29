@@ -16,11 +16,12 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 
 
 def objective(trial):
+ 
     # Define hyperparameters based on the trial
-    lr0 = trial.suggest_loguniform('learning_rate', 0.009, 0.011)
+    lr0 = trial.suggest_loguniform('learning_rate', 0.0095, 0.0096)
     # batch = int(trial.suggest_discrete_uniform('batch', 4, 100,4))
-    weight_decay = trial.suggest_loguniform('weight_decay',0.0004,0.0006)
-    momentum = trial.suggest_uniform('momentum', 0.93, 0.94)
+    weight_decay = trial.suggest_loguniform('weight_decay',0.0004,0.00045)
+    momentum = trial.suggest_uniform('momentum', 0.935, 0.94)
     # optimizer = trial.suggest_categorical("optimizer", ["SGD", "Adam"])
     # iterations = int(trial.suggest_discrete_uniform('batch', 100, 1000,100))
 
@@ -29,15 +30,16 @@ def objective(trial):
     # epochs = 100  
     iou = 0.7
     # weight_decay = 0.0005
-    # momentum = 0.937
-    batch = 100
+    # momentum = 0.9375
+    batch = 64
     iterations = 100000
     optimizer = "auto" 
     home = os.getcwd()
-    dataset_name = "maize-uav-crop-disease"
+    dataset_name = "maize-uav-crop-disease" 
 
     # define the model
     model = YOLO("yolo11n-seg_trained_maize-uav-crop-disease.pt").to('cuda')
+    model = YOLO("yolo11n-seg_trained_hyper_parameters.pt").to('cuda')
     
     # Tune YOLOv11 model
     model.tune(
