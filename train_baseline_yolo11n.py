@@ -12,10 +12,10 @@ print(home)
 model_name = "yolo11n-seg" # segmentation
 dataset_name = "maize-uav-crop-disease"
 
-# Load a yolo11s model
-model = YOLO("yolo11s-seg.pt").to("cuda")
+# Load a yolo11n model
+model = YOLO("yolo11n-seg.pt").to("cuda")
 
-# Start tuning hyperparameters for yolo11s training on the COCO8 dataset
+# Start tuning hyperparameters for yolo11n training on the COCO8 dataset
 result_grid = model.train(
     data=home+"/dataset/"+dataset_name+"/data.yaml"
     ,device = "0,1"

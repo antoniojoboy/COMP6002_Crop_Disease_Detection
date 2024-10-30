@@ -22,3 +22,5 @@ all_YOLO11/
 yolo11n/
 yolo11n_best/
 yolo11n_finetuned/
+yolo11n_finetune/
+yolo11n_finetune_process/
