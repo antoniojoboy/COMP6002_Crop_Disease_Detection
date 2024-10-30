@@ -13,8 +13,8 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 
 def objective(trial):
     # Define hyperparameters based on the trial
-    lr0 = trial.suggest_loguniform('learning_rate', 0.001, 0.99)
-    batch = int(trial.suggest_discrete_uniform('batch', 4, 100,4))
+    lr0 = trial.suggest_loguniform('learning_rate', 0.00, 0.11)
+    # batch = int(trial.suggest_discrete_uniform('batch', 4, ,16))
     weight_decay = trial.suggest_loguniform('weight_decay',0.0001,0.9)
     momentum = trial.suggest_uniform('momentum', 0.001, 0.99)
     # epochs = int(trial.suggest_discrete_uniform('epochs', 50, 100,10))
@@ -25,7 +25,8 @@ def objective(trial):
     # model.load("YOLO11n-seg_trained_maize-disease-20240221-8.pt")
     
     home = os.getcwd()
-    epochs = 200
+    epochs = 100
+    batch = 16
     dataset_name = "maize-uav-crop-disease"
     
     # Initialize YOLOv11 model

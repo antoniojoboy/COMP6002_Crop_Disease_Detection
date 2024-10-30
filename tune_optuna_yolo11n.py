@@ -6,7 +6,7 @@ from ultralytics import YOLO
 wandb.login()
 run = wandb.init(
     # Set the project where this run will be logged
-    project="yolo11n",
+    project="yolo11n_best",
     # Track hyperparameters and run metadata
 )
 
@@ -16,16 +16,23 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 
 def objective(trial):
     # Define hyperparameters based on the trial
-    lr0 = trial.suggest_loguniform('learning_rate', 0.0001, 0.11)
-    batch = int(trial.suggest_discrete_uniform('batch', 4, 100,4))
-    weight_decay = trial.suggest_loguniform('weight_decay',0.0001,0.1)
-    momentum = trial.suggest_uniform('momentum', 0.8, 0.99)
-    optimizer = trial.suggest_categorical("optimizer", ["SGD", "Adam"])
+    # lr0 = trial.suggest_loguniform('learning_rate', 0.009, 0.011)
+    # batch = int(trial.suggest_discrete_uniform('batch', 4, 100,4))
+    # weight_decay = trial.suggest_loguniform('weight_decay',0.0004,0.0009)
+    # momentum = trial.suggest_uniform('momentum', 0.8, 0.99)
+    # optimizer = trial.suggest_categorical("optimizer", ["SGD", "Adam"])
 
     # define the model
     model = YOLO("yolo11n-seg.pt").to('cuda')
     
-    epochs = 100    
+    lr0 = 0.01    
+    epochs = 100  
+    iou = 0.9 
+    weight_decay = 0.0005
+    momentum = 0.937
+    batch = 16
+    iterations = 50
+    optimizer = "SGD"    
     home = os.getcwd()
     dataset_name = "maize-uav-crop-disease"
     
@@ -33,12 +40,14 @@ def objective(trial):
     model.tune(
         data=home+"/dataset/"+dataset_name+"/data.yaml"
         ,lr0=lr0
+        ,iou=iou
         ,batch=batch
         ,momentum=momentum
         ,weight_decay=weight_decay
         ,epochs = epochs
         ,optimizer=optimizer
-        ,project="yolo11n"
+        ,iterations=iterations
+        ,project="yolo11n_best"
         ,name="yolo11n"
         ,device = "0,1"
         # ,patience = 5

@@ -9,13 +9,13 @@ home = os.getcwd()
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 print(home)
 
-model_name = "yolo11n" # segmentation
+model_name = "yolo11n-seg" # segmentation
 dataset_name = "maize-uav-crop-disease"
 
-# Load a YOLO11n model
-model = YOLO("yolo11n-seg.pt")
+# Load a yolo11n model
+model = YOLO("yolo11n-seg.pt").to("cuda")
 
-# Start tuning hyperparameters for YOLO11n training on the COCO8 dataset
+# Start tuning hyperparameters for yolo11n training on the COCO8 dataset
 result_grid = model.train(
     data=home+"/dataset/"+dataset_name+"/data.yaml"
     ,device = "0,1"
