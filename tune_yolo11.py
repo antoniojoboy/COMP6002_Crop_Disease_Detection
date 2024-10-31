@@ -24,8 +24,10 @@ def objective(trial):
     optimizer = trial.suggest_categorical("optimizer", ["SGD", "Adam"])
 
     # define the model
-    model = YOLO("yolo11n-seg.pt").to('cuda')
+    # model = YOLO("yolo11n-seg.pt").to('cuda')
     # model.load("YOLO11n-seg_trained_maize-disease-20240221-8.pt")
+    model = YOLO("comare_resutls/yolo11n_0.6435/weights/best.pt").to('cuda')
+    
     
     home = os.getcwd()
     dataset_name = "maize-uav-crop-disease"
