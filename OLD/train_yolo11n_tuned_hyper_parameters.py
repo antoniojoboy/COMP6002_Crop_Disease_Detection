@@ -15,7 +15,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
 
 
 # define the model
-model = YOLO("yolo11n-seg.pt").to('cuda')
+model = YOLO("yolo11x-seg.pt").to('cuda')
 
 lr0 = 0.01
 epochs = 100  
@@ -40,7 +40,7 @@ model.train(
     # ,optimizer=optimizer
     # ,iterations=
     ,project="yolo11n_finetune"
-    ,name="yolo11n_baseline"
+    ,name="yolo11x"
     ,device = "0,1"
     # ,patience = 5
     # ,save = True
@@ -54,4 +54,4 @@ metrics = model.val(
     data=home+"/dataset/"+dataset_name+"/data.yaml"
     ,device = "0,1"
 )
-model.save("yolo11n-seg_trained_hyper_parameters.pt")
+model.save("yolo11x-seg_trained.pt")
