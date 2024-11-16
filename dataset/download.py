@@ -15,9 +15,9 @@ rf = Roboflow(api_key=api_key)
 # dataset = version.download("yolov11")
                 
 
-# project = rf.workspace("galihnugraha").project("maize-disease-20240221")
-# version = project.version(8)
-# dataset = version.download("yolov11")
+project = rf.workspace("galihnugraha").project("maize-disease-20240221")
+version = project.version(8)
+dataset = version.download("yolov11")
 
 
 # project = rf.workspace("shoaib-hossain-ut2m8").project("crop-disease-segmentation")
@@ -25,7 +25,7 @@ rf = Roboflow(api_key=api_key)
 # dataset = version.download("yolov11")
 
 
-project = rf.workspace("leafcv").project("leafcv-3.0")
-version = project.version(10)
-dataset = version.download("yolov11")
+# project = rf.workspace("leafcv").project("leafcv-3.0")
+# version = project.version(10)
+# dataset = version.download("yolov11")
                 
