@@ -1,0 +1,30 @@
+# 21/50 iterations complete ✅ (34580.26s)
+# Results saved to yolo11nGYMNSA\tune
+# Best fitness=0.50388 observed at iteration 21
+# Best fitness metrics are {'metrics/precision(B)': 0.75115, 'metrics/recall(B)': 0.65948, 'metrics/mAP50(B)': 0.74075, 'metrics/mAP50-95(B)': 0.47756, 'val/box_loss': 0.63397, 'val/cls_loss': 1.00281, 'val/dfl_loss': 0.41527, 'fitness': 0.50388}
+# Best fitness model is yolo11nGYMNSA\yolo11n21
+# Best fitness hyperparameters are printed below.
+
+lr0: 0.00945
+lrf: 0.01501
+momentum: 0.88056
+weight_decay: 0.00039
+warmup_epochs: 2.3905
+warmup_momentum: 0.87711
+box: 7.56922
+cls: 0.82363
+dfl: 1.11869
+hsv_h: 0.0198
+hsv_s: 0.77524
+hsv_v: 0.46601
+degrees: 0.0
+translate: 0.09957
+scale: 0.47237
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.51833
+bgr: 0.0
+mosaic: 0.37268
+mixup: 0.0
+copy_paste: 0.0
