@@ -10,7 +10,7 @@ dataset_name = "GYMNSA"
 wandb.login()
 run = wandb.init(
     # Set the project where this run will be logged
-    project="yolo11n"+"GYMNSA",
+    project="yolo11nGYMNSA",
     # Track hyperparameters and run metadata
 )
 
