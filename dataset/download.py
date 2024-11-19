@@ -30,6 +30,5 @@ rf = Roboflow(api_key=api_key)
 # dataset = version.download("yolov11")
                 
 project = rf.workspace("comp6002").project("gymnsa-tjfm9")
-version = project.version(1)
+version = project.version(2)
 dataset = version.download("yolov11")
-                
